@@ -282,7 +282,29 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
                     && contexts[0].parameters.fields['years-of-experience'] != '') ? contexts[0].parameters.fields['years-of-experience'].stringValue : '';
                 let job_vacancy = (isDefined(contexts[0].parameters.fields['job-vacancy'])
                     && contexts[0].parameters.fields['job-vacancy'] != '') ? contexts[0].parameters.fields['job-vacancy'].stringValue : '';
-                if (phone_number != '' && user_name != '' && previous_job != '' && years_of_experience != ''
+
+
+                if (phone_number == '' && user_name != '' && previous_job != '' && years_of_experience == '') {
+
+                    let replies = [
+                        {
+                            "content_type":"text",
+                            "title":"Less than 1 year",
+                            "payload":"Less than 1 year"
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"Less than 10 years",
+                            "payload":"Less than 10 years"
+                        },
+                        {
+                            "content_type":"text",
+                            "title":"More than 10 years",
+                            "payload":"More than 10 years"
+                        }
+                    ];
+                    sendQuickReply(sender, messages[0].text.text[0], replies);
+                } else if (phone_number != '' && user_name != '' && previous_job != '' && years_of_experience != ''
                     && job_vacancy != '') {
 
                     let emailContent = 'A new job enquiery from ' + user_name + ' for the job: ' + job_vacancy +
