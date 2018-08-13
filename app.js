@@ -12,6 +12,7 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 const userService = require('./user');
+const colors = require('./colors');
 
 // Messenger API parameters
 if (!config.FB_PAGE_TOKEN) {
@@ -228,6 +229,13 @@ function handleEcho(messageId, appId, metadata) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
 	switch (action) {
+        case "iphone_colors":
+            colors.readAllColors(function (allColors) {
+                let allColorsString = allColors.join(', ');
+                let reply = `IPhone xxx is available in ${allColorsString}. What is your favourite color?`;
+                sendTextMessage(sender, reply);
+            });
+            break;
         case "get-current-weather":
         	if ( parameters.fields.hasOwnProperty('geo-city') && parameters.fields['geo-city'].stringValue!='') {
             	request({
