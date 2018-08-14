@@ -247,6 +247,16 @@ function handleQuickReply(senderID, quickReply, messageId) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
 	switch (action) {
+        case "unsubscribe":
+            userService.newsletterSettings(function(updated) {
+                if (updated) {
+                    fbService.sendTextMessage(sender, "You're unsubscribed. You can always subscribe back!");
+                } else {
+                    fbService.sendTextMessage(sender, "Newsletter is not available at this moment." +
+                        "Try again later!");
+                }
+            }, 0, sender);
+            break;
         case "buy.iphone":
             colors.readUserColor(function(color) {
                     let reply;
