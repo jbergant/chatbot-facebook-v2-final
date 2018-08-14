@@ -489,7 +489,7 @@ function receivedPostback(event) {
             break;
         case 'JOB_APPLY':
             //get feedback with new jobs
-            dialogflowService.sendTextQueryToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'job openings');
+            dialogflowService.sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'JOB_OPENINGS');
             break;
         case 'CHAT':
             //user wants to chat
