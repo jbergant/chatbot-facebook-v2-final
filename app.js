@@ -11,6 +11,8 @@ const uuid = require('uuid');
 const pg = require('pg');
 pg.defaults.ssl = true;
 
+const broadcast = require('./routes/broadcast');
+
 const userService = require('./services/user-service');
 const colors = require('./colors');
 const weatherService = require('./services/weather-service');
@@ -149,6 +151,8 @@ const usersMap = new Map();
 app.get('/', function (req, res) {
 	res.send('Hello world, I am a chat bot')
 })
+
+app.use('/broadcast', broadcast);
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
