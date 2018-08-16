@@ -38,7 +38,10 @@ router.get('/logout', ensureAuthenticated, function (req, res) {
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        return next();
+        if (req.user.id === config.ADMIN_ID ) {
+            return next();
+        }
+        res.redirect('/broadcast/no-access');
     } else {
         res.redirect('/broadcast/');
     }
