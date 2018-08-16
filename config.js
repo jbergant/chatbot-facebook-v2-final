@@ -12,6 +12,7 @@ module.exports = {
     EMAIL_FROM: process.env.EMAIL_FROM,
     EMAIL_TO: process.env.EMAIL_TO,
     WEATHER_API_KEY: process.env.WEATHER_API_KEY,
+    ADMIN_ID: process.env.ADMIN_ID,
     PG_CONFIG: {
         user: process.env.PG_CONFIG_USER,
         database: process.env.PG_CONFIG_DATABASE,

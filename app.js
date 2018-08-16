@@ -67,6 +67,9 @@ if (!config.PG_CONFIG) { //pg config
 if (!config.FB_APP_ID) { //app id
     throw new Error('missing FB_APP_ID');
 }
+if (!config.ADMIN_ID) { //admin id for login
+    throw new Error('missing ADMIN_ID');
+}
 
 app.set('port', (process.env.PORT || 5000))
 
