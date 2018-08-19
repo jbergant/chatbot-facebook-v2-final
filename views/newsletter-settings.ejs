@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Udemy demo webview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" href="/webview.css" />
+</head>
+<body>
+<div class="container">
+    SAMPLE WEBVIEW
+</div>
+
+
+
+<script>
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'Messenger'));
+
+
+    window.extAsyncInit = function() {
+        // the Messenger Exstensions JS SDK is done loading
+    };
+
+</script>
+</body>
+</html>
