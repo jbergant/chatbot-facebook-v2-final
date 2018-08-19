@@ -42,6 +42,15 @@
 
     window.extAsyncInit = function() {
         // the Messenger Exstensions JS SDK is done loading
+
+        
+        document.getElementById('submitButton').addEventListener('click', function() {
+            MessengerExtensions.requestCloseBrowser(function success() {
+                // webview closed
+            }, function error(err) {
+                // an error occured
+            });
+        });
     };
 
 </script>
