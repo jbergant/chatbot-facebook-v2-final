@@ -8,7 +8,24 @@
 </head>
 <body>
 <div class="container">
-    SAMPLE WEBVIEW
+    <h3>Newsletter settings</h3>
+    <form action="/webviews/save" method="get">
+        <input type="hidden" name="psid" id="psid">
+        <h5>Freqency</h5>
+        <input type="radio" name="newsletter" value="1"> Weekly<br/>
+        <input type="radio" name="newsletter" value="2"> Daily<br/>
+        <input type="radio" name="newsletter" value="0"> Never<br/>
+
+        <h5>Topics</h5>
+        <input type="checkbox" name="topics[]" value="IPhone"> IPhone<br/>
+        <input type="checkbox" name="topics[]" value="IPad"> IPad<br/>
+        <input type="checkbox" name="topics[]" value="Mac"> Mac<br/>
+        <h5>Send deals</h5>
+        <input type="radio" name="deals" value="1"> Yes<br/>
+        <input type="radio" name="deals" value="0"> No<br/>
+
+        <button id="submitButton" type="submit">Submit</button>
+    </form>
 </div>
 
 
