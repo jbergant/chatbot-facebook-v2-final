@@ -14,7 +14,8 @@ router.get('/webview', function (req, res) {
 router.get('/save', function (req, res) {
     let body = req.query;
     let topics = body.topics.join(',');
-    let response = `Newsletter ${body.newsletter}, topics: ${topics} and deals ${body.deals}`;
+    let response = `Newsletter ${body.newsletter}, topics: ${topics} and deals ${body.deals} 
+    for psid ${body.psid}`;
 
     // psid??
     fbservice.sendTextMessage(body.psid, response);

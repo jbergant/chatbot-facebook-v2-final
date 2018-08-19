@@ -42,7 +42,14 @@
 
     window.extAsyncInit = function() {
         // the Messenger Exstensions JS SDK is done loading
-
+        MessengerExtensions.getContext('1559972370790187',
+            function success(thread_context){
+                document.getElementById('psid').value = thread_context.psid;
+            },
+            function error(err){
+                // error
+            }
+        );
         
         document.getElementById('submitButton').addEventListener('click', function() {
             MessengerExtensions.requestCloseBrowser(function success() {
