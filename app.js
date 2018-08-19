@@ -12,6 +12,7 @@ const pg = require('pg');
 pg.defaults.ssl = true;
 
 const broadcast = require('./routes/broadcast');
+const webviews = require('./routes/webviews');
 
 const userService = require('./services/user-service');
 const colors = require('./colors');
@@ -156,6 +157,9 @@ app.get('/', function (req, res) {
 })
 
 app.use('/broadcast', broadcast);
+app.use('/webviews', webviews);
+
+
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
