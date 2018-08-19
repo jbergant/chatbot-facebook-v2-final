@@ -2,30 +2,44 @@
 <html>
 <head>
     <title>Udemy demo webview</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/webview.css" />
 </head>
 <body>
 <div class="container">
-    <h3>Newsletter settings</h3>
+    <div class="card-panel teal lighten-2"><h3>Newsletter settings</h3></div>
     <form action="/webviews/save" method="get">
         <input type="hidden" name="psid" id="psid">
-        <h5>Freqency</h5>
-        <input type="radio" name="newsletter" value="1"> Weekly<br/>
-        <input type="radio" name="newsletter" value="2"> Daily<br/>
-        <input type="radio" name="newsletter" value="0"> Never<br/>
-
-        <h5>Topics</h5>
-        <input type="checkbox" name="topics[]" value="IPhone"> IPhone<br/>
-        <input type="checkbox" name="topics[]" value="IPad"> IPad<br/>
-        <input type="checkbox" name="topics[]" value="Mac"> Mac<br/>
-        <h5>Send deals</h5>
-        <input type="radio" name="deals" value="1"> Yes<br/>
-        <input type="radio" name="deals" value="0"> No<br/>
-
-        <button id="submitButton" type="submit">Submit</button>
+        <div class="row">
+            <div class="col s12"><h5>Frequency</h5></div>
+            <div class="col s4"><label><input type="radio" class="newsletter" name="newsletter" id="newsletter_1" value="1" ><span>Weekly</span></label></div>
+            <div class="col s4"><label><input type="radio" class="newsletter" name="newsletter" id="newsletter_2" value="2"><span>Daily</span></label></div>
+            <div class="col s4"><label><input type="radio" class="newsletter" name="newsletter" id="newsletter_0" value="0"><span>Never</span></label></div>
+        </div>
+        <div class="row">
+            <div class="col s12"><h5>Topics</h5></div>
+            <div class="col s4"><label><input type="checkbox" id="topic_iPhone" class="topics" name="topics[]" value="iPhone" ><span>iPhone</span></label></div>
+            <div class="col s4"><label><input type="checkbox" id="topic_iPad" class="topics" name="topics[]" value="iPad"><span>iPad</span></label></div>
+            <div class="col s4"><label><input type="checkbox" id="topic_Mac" class="topics" name="topics[]" value="Mac"><span>Mac</span></label></div>
+        </div>
+        <div class="row">
+            <div class="col s12"><h5>Send deals</h5></div>
+            <div class="col s6"><label><input type="radio" class="deals"  id="deals_1" name="deals" value="1" ><span>Yes</span></label></div>
+            <div class="col s6"><label><input type="radio" class="deals" id="deals_0" name="deals" value="0"><span>No</span></label></div>
+        </div>
+        <button id="submitButton" class="btn waves-effect waves-light " type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+        </button>
     </form>
+
 </div>
 
 
