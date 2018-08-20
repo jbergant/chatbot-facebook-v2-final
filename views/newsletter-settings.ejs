@@ -58,14 +58,24 @@
         // the Messenger Exstensions JS SDK is done loading
         MessengerExtensions.getContext('1559972370790187',
             function success(thread_context){
-                document.getElementById('psid').value = thread_context.psid;
+                $('#psid').val(thread_context.psid);
+                $.getJSON('/webviews/settings?psid=' + thread_context.psid, function (data) {
+                    $('#newsletter_' + data.newsletter).prop('checked', true);
+                    $('#deals_' + data.deals).prop('checked', true);
+                    if (data.topics) {
+                        let topics = data.topics.split(',');
+                        topics.forEach(function (topic) {
+                            $('#topic_' + topic).prop('checked', true);
+                        })
+                    }
+                });
             },
             function error(err){
                 // error
             }
         );
-        
-        document.getElementById('submitButton').addEventListener('click', function() {
+
+        $('#submitButton').click(function() {
             MessengerExtensions.requestCloseBrowser(function success() {
                 // webview closed
             }, function error(err) {

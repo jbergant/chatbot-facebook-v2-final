@@ -38,4 +38,32 @@ router.get('/save', function (req, res) {
     });
 });
 
+
+router.get('/settings', function (req, res) {
+
+    let pool = new pg.Pool(config.PG_CONFIG);
+    pool.connect(function (err, client, done) {
+        if (err) {
+            return console.error('Error acquiering client');
+        }
+        client.query("SELECT newsletter, topics, deals FROM public.users WHERE fb_id=$1",
+            [
+                req.query.psid
+            ],
+            function (err, result) {
+                if(err === null) {
+                    let settings = [];
+                    if (result.rows.length > 0) {
+                        settings = result.rows[0];
+                    }
+                    res.json(settings);
+                } else {
+                    res.json([]);
+                }
+            }
+        )
+    })
+
+});
+
 module.exports = router;
