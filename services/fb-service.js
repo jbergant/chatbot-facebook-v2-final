@@ -3,7 +3,21 @@ const request = require('request');
 const crypto = require('crypto');
 const config = require('../config');
 module.exports = {
-
+    sendPassThread: function(senderID) {
+        request(
+            {
+                uri: "https://graph.facebook.com/v2.6/me/pass_thread_control",
+                qs: { access_token: config.FB_PAGE_TOKEN },
+                method: "POST",
+                json: {
+                    recipient: {
+                        id: senderID
+                    },
+                    target_app_id: config.FB_PAGE_INBOX_ID // ID in the page inbox setting under messenger platform
+                }
+            }
+        );
+    },
 
     handleMessages: function(messages, sender){
         let self = module.exports;
