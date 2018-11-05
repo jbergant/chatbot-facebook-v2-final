@@ -71,6 +71,9 @@ if (!config.FB_APP_ID) { //app id
 if (!config.ADMIN_ID) { //admin id for login
     throw new Error('missing ADMIN_ID');
 }
+if (!config.FB_PAGE_INBOX_ID) { //page inbox id - the receiver app
+    throw new Error('missing FB_PAGE_INBOX_ID');
+}
 
 app.set('port', (process.env.PORT || 5000))
 
