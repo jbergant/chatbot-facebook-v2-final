@@ -293,6 +293,9 @@ function receivedMessage(event) {
 function handleQuickReply(senderID, quickReply, messageId) {
     var quickReplyPayload = quickReply.payload;
     switch (quickReplyPayload) {
+        case "LIVE_AGENT":
+            fbService.sendPassThread(senderID);
+            break;
         case 'NEWS_PER_WEEK':
             userService.newsletterSettings(function (updated) {
                 if (updated) {
@@ -324,6 +327,28 @@ function handleQuickReply(senderID, quickReply, messageId) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
 	switch (action) {
+        case "input.unknown":
+            fbService.handleMessages(messages, sender);
+            
+            fbService.sendTypingOn(sender);
+
+            //ask what user wants to do next
+            setTimeout(function() {
+                let responseText = "Can you please refrain your question or click the button to talk to a live agent. " +
+                    "I'm just a bot.";
+
+                let replies = [
+                    {
+                        "content_type": "text",
+                        "title": "Live agent",
+                        "payload": "LIVE_AGENT"
+                    }
+                ];
+
+                fbService.sendQuickReply(sender, responseText, replies);
+            }, 2000);
+
+            break;
         case "talk.human":
             fbService.sendPassThread(sender);
             break;
