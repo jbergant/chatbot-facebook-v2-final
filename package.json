@@ -17,6 +17,7 @@
     "dialogflow": "^0.5.0",
     "express": "^4.16.3",
     "request": "^2.87.0",
+    "sendgrid": "^5.2.3",
     "uuid": "^3.3.2"
   }
 }
