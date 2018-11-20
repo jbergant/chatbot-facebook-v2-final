@@ -11,4 +11,13 @@ module.exports = {
     EMAIL_FROM: process.env.EMAIL_FROM,
     EMAIL_TO: process.env.EMAIL_TO,
     WEATHER_API_KEY: process.env.WEATHER_API_KEY,
+    PG_CONFIG: {
+        user: process.env.PG_CONFIG_USER,
+        database: process.env.PG_CONFIG_DATABASE,
+        password: process.env.PG_CONFIG_PASSWORD,
+        host: process.env.PG_CONFIG_HOST,
+        port: 5432,
+        max: 10,
+        idleTimeoutMillis: 30000,
+    }
 };
