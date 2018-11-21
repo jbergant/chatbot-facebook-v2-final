@@ -90,6 +90,7 @@ const sessionClient = new dialogflow.SessionsClient(
 
 
 const sessionIds = new Map();
+const usersMap = new Map();
 
 // Index route
 app.get('/', function (req, res) {
@@ -153,7 +154,11 @@ app.post('/webhook/', function (req, res) {
 });
 
 
-
+function setSessionAndUser(senderID) {
+    if (!sessionIds.has(senderID)) {
+        sessionIds.set(senderID, uuid.v1());
+    }
+}
 
 
 function receivedMessage(event) {
@@ -163,9 +168,8 @@ function receivedMessage(event) {
 	var timeOfMessage = event.timestamp;
 	var message = event.message;
 
-	if (!sessionIds.has(senderID)) {
-		sessionIds.set(senderID, uuid.v1());
-	}
+    setSessionAndUser(senderID);
+
 	//console.log("Received message for user %d and page %d at %d with message:", senderID, recipientID, timeOfMessage);
 	//console.log(JSON.stringify(message));
 
@@ -892,6 +896,8 @@ function receivedPostback(event) {
 	var recipientID = event.recipient.id;
 	var timeOfPostback = event.timestamp;
 
+    setSessionAndUser(senderID);
+
 	// The 'payload' param is a developer-defined field which is set in a postback 
 	// button for Structured Messages. 
 	var payload = event.postback.payload;
@@ -906,7 +912,7 @@ function receivedPostback(event) {
             break;
         case 'CHAT':
             //user wants to chat
-            sendTextMessage(senderID, "I love chatting too. Do you have any other questions for me?");
+            sendTextMessage(senderID, "I love chstartatting too. Do you have any other questions for me?");
             break;
 		default:
 			//unindentified payload
