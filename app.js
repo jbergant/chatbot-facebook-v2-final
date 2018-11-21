@@ -664,36 +664,6 @@ function sendAccountLinking(recipientId) {
 	callSendAPI(messageData);
 }
 
-
-function greetUserText(userId) {
-	//first read user firstname
-	request({
-		uri: 'https://graph.facebook.com/v2.7/' + userId,
-		qs: {
-			access_token: config.FB_PAGE_TOKEN
-		}
-
-	}, function (error, response, body) {
-		if (!error && response.statusCode == 200) {
-
-			var user = JSON.parse(body);
-
-			if (user.first_name) {
-				console.log("FB user: %s %s, %s",
-					user.first_name, user.last_name, user.gender);
-
-				sendTextMessage(userId, "Welcome " + user.first_name + '!');
-			} else {
-				console.log("Cannot get data for fb user with id",
-					userId);
-			}
-		} else {
-			console.error(response.error);
-		}
-
-	});
-}
-
 /*
  * Call the Send API. The message data goes in the body. If successful, we'll 
  * get the message id in a response 
@@ -701,7 +671,7 @@ function greetUserText(userId) {
  */
 function callSendAPI(messageData) {
 	request({
-		uri: 'https://graph.facebook.com/v2.6/me/messages',
+		uri: 'https://graph.facebook.com/v3.2/me/messages',
 		qs: {
 			access_token: config.FB_PAGE_TOKEN
 		},
