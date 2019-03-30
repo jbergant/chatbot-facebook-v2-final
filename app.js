@@ -327,6 +327,21 @@ function handleQuickReply(senderID, quickReply, messageId) {
 
 function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
 	switch (action) {
+        case "input.firstname":
+            if ( parameters.fields['first-name'].stringValue === '' ) {
+                fbService.handleMessages(messages, sender);
+            } else {
+                dialogflowService.sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, 'LAST_NAME');
+            }
+            break;
+        case "input.lastname":
+            fbService.handleMessages(messages, sender);
+            if ( parameters.fields['last-name'].stringValue !== '' ) {
+                console.log(contexts[0].parameters.fields['first-name'].stringValue);
+                console.log(contexts[0].parameters.fields['last-name'].stringValue);
+                // save first name and last name to db
+            }
+            break;
         case "input.unknown":
             fbService.handleMessages(messages, sender);
             
