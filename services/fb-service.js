@@ -584,7 +584,7 @@ module.exports = {
      */
     callSendAPI: function(messageData) {
         request({
-            uri: 'https://graph.facebook.com/v2.6/me/messages',
+            uri: 'https://graph.facebook.com/v3.2/me/messages',
             qs: {
                 access_token: config.FB_PAGE_TOKEN
             },
