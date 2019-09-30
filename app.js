@@ -545,6 +545,12 @@ function handleDialogFlowResponse(sender, response) {
 
     fbService.sendTypingOff(sender);
 
+    // here is where we check for sentiment results
+
+    // In cases where the sentiment analysis score is 0, the returned sentimentAnalysisResult field will be empty!!!
+    console.log("sentiment results");
+    console.log(response.sentimentAnalysisResult);
+
     if (fbService.isDefined(action)) {
         handleDialogFlowAction(sender, action, messages, contexts, parameters);
     } else if (fbService.isDefined(messages)) {
