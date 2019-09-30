@@ -548,10 +548,36 @@ function handleDialogFlowResponse(sender, response) {
     // here is where we check for sentiment results
 
     // In cases where the sentiment analysis score is 0, the returned sentimentAnalysisResult field will be empty!!!
-    console.log("sentiment results");
-    console.log(response.sentimentAnalysisResult);
 
-    if (fbService.isDefined(action)) {
+    let sentimentResult = {
+        score: 0,
+        magnitude: 0,
+        text: response.queryText
+    };
+
+    if (response.sentimentAnalysisResult) {
+        sentimentResult.score = response.sentimentAnalysisResult.queryTextSentiment.score;
+        sentimentResult.magnitude = response.sentimentAnalysisResult.queryTextSentiment.magnitude;
+    }
+
+    let snt = {};
+    if (usersSentiment.has(sender)) {
+        snt = usersSentiment.get(sender);
+    }
+
+    snt[Math.floor(Date.now() / 1000)] = sentimentResult;
+    console.log('SNT!!!!');
+    console.log(snt);
+
+    usersSentiment.set(sender, snt);
+
+    if ( response.sentimentAnalysisResult && sentimentResult.score < -0.5) {
+        fbService.sendTextMessage(sender, 'I sense you are not satisfied with my answers. ' +
+            'Let me call Jana for you. She should be here ASAP.');
+
+        fbService.sendPassThread(sender);
+
+    } else if (fbService.isDefined(action)) {
         handleDialogFlowAction(sender, action, messages, contexts, parameters);
     } else if (fbService.isDefined(messages)) {
         fbService.handleMessages(messages, sender);
