@@ -561,6 +561,8 @@ function handleDialogFlowResponse(sender, response) {
     }
 
     let snt = {};
+    let beforeSentiment;
+
     if (usersSentiment.has(sender)) {
         snt = usersSentiment.get(sender);
     }
@@ -571,7 +573,16 @@ function handleDialogFlowResponse(sender, response) {
 
     usersSentiment.set(sender, snt);
 
-    if ( response.sentimentAnalysisResult && sentimentResult.score < -0.5) {
+    let differenceInScore = (beforeSentiment === undefined) ?
+        0 : Math.abs(beforeSentiment.score - sentimentResult.score);
+
+    if ( response.sentimentAnalysisResult &&  differenceInScore > 0.5 &&
+        sentimentResult.score < 0 && sentimentResult.score > -0.6) {
+
+        fbService.sendTextMessage(sender, 'Did I say something wrong? ' +
+            'Type help to find out how I can serve you better.');
+
+    } else if ( response.sentimentAnalysisResult && sentimentResult.score < -0.5) {
         fbService.sendTextMessage(sender, 'I sense you are not satisfied with my answers. ' +
             'Let me call Jana for you. She should be here ASAP.');
 
